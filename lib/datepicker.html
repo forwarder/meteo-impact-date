@@ -1,0 +1,59 @@
+<template name="ImpactDate">
+  {{#with context}}
+  <div class="{{wrapperClass}}">
+    {{> Template.dynamic template=template}}
+  </div>
+  {{/with}}
+</template>
+
+<template name="ImpactDateDefault">
+  <div class="impact-date">
+    <nav class="impact-date-controls">
+      <button type="button" class="impact-date-previous" data-action="previous"></button>
+      <div class="impact-date-title">
+          <span data-action="switch">{{title}}</span>
+      </div>
+      <button type="button" class="impact-date-next" data-action="next"></button>
+    </nav>
+    <div class="impact-date-grid">
+      {{> Template.dynamic template=grid}}
+    </div>
+    <footer class="impact-date-footer">
+      {{#if showToday}}
+        <button type="button" class="impact-date-today" data-action="today">Today</button>
+      {{/if}}
+      {{#if showClear}}
+        <button type="button" class="impact-date-clear" data-action="clear">Clear</button>
+      {{/if}}
+    </footer>
+  </div>
+</template>
+
+<template name="ImpactDateDays">
+  <header class="impact-date-weekdays">
+    {{#each calendar.weekDays}}
+      <div class="impact-date-weekday">{{this}}</div>
+    {{/each}}
+  </header>
+  <div class="impact-date-days">
+    {{#each calendar.days}}
+      <div class="impact-date-day {{class}}" data-action="{{#if day}}set-date{{/if}}"><span>{{day}}</span></div>
+    {{/each}}
+  </div>
+</template>
+
+<template name="ImpactDateMonths">
+  <div class="impact-date-months">
+    {{#each calendar.months}}
+      <div class="impact-date-month {{class}}" data-action="set-month"><span>{{month}}</span></div>
+    {{/each}}
+  </div>
+</template>
+
+<template name="ImpactDateYears">
+  <div class="impact-date-years">
+    {{#each calendar.years}}
+      <div class="impact-date-year {{class}}" data-action="set-year"><span>{{year}}</span></div>
+    {{/each}}
+  </div>
+</template>

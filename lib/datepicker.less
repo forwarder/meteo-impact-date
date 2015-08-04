@@ -1,0 +1,183 @@
+@primary-color: #DE4F51;
+
+/* layout */
+.impact-date-wrapper, .impact-date {
+  display: flex;
+  flex-direction: column;
+}
+.impact-date {
+  flex: 1;
+  &-controls {
+    display: flex;
+  }
+  &-title {
+    flex: 1;
+    text-align: center;
+  }
+  &-grid {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  &-weekdays {
+    display: flex;
+  }
+  &-weekday {
+    flex: 1;
+  }
+  &-years, &-months, &-days {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: stretch;
+    flex: 1;
+  }
+  &-day, &-month, &-year {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &-day {
+    width: percentage(1/7);
+  }
+  &-month, &-year {
+    width: percentage(1/3);
+  }
+}
+
+/* styles */
+.impact-date-wrapper {
+  &.impact-date-inactive, &.impact-date-active {
+    position: absolute;
+  }
+  &.impact-date-inactive {
+    display: none;
+  }
+  &.impact-date-active {
+    display: flex;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    z-index: 1;
+  }
+}
+.impact-date-default {
+  max-width: 320px;
+  min-height: 320px;
+
+  .impact-date {
+    background: #ffffff;
+    padding: 10px;
+
+    button {
+      border: 0;
+      background: 0;
+      cursor: pointer;
+      outline: none;
+      color: @primary-color;
+      text-transform: uppercase;
+      &:hover {
+        color: darken(@primary-color, 10%);
+      }
+    }
+
+    &-controls {
+      button {
+        width: 42px;
+        height: 42px;
+        &::before {
+        	border-style: solid;
+        	border-width: 3px 3px 0 0;
+          border-color: @primary-color;
+        	content: '';
+        	display: inline-block;
+        	height: 8px;
+        	transform: rotate(-45deg);
+        	width: 8px;
+        }
+        &:hover &::before {
+          border-color: darken(@primary-color, 10%);
+        }
+        &.impact-date-previous:before {
+          left: 0.25em;
+          transform: rotate(-135deg);
+        }
+
+        &.impact-date-next:before {
+          left: 0;
+          transform: rotate(45deg);
+        }
+      }
+    }
+
+    &-title {
+      color: @primary-color;
+      line-height: 42px;
+      cursor: pointer;
+      &:hover {
+        color: darken(@primary-color, 10%);
+      }
+    }
+
+    &-weekday {
+      color: rgba(0, 0, 0, 0.4);
+      font-weight: bold;
+      height: 42px;
+      line-height: 42px;
+    }
+
+    &-weekday, &-day {
+      text-align: center;
+    }
+
+
+    &-current {
+      color: @primary-color;
+      font-weight: bold;
+    }
+
+    &-day, &-month, &-year {
+      cursor: pointer;
+      &:hover {
+        color: darken(@primary-color, 10%);
+      }
+    }
+
+    &-empty {
+      cursor: auto;
+    }
+
+    &-day {
+      span {
+        border-radius: 50%;
+        width: 42px;
+        height: 42px;
+        line-height: 42px;
+      }
+      &.impact-date-selected {
+        span {
+          background: @primary-color;
+          color: #ffffff;
+        }
+      }
+    }
+
+    &-today {
+      span {
+        background: rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    &-adjacent {
+      color: rgba(0, 0, 0, 0.2);
+    }
+
+    &-month, &-year {
+      &.impact-date-selected {
+        font-weight: bold;
+        color: @primary-color;
+      }
+    }
+
+    &-footer {
+      text-align: right;
+    }
+  }
+}
